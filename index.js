@@ -35,6 +35,10 @@ app.use("/hrcase",require(rootPath.concat("/router/hrcaseRouter.js")));
 app.use("/casephoto",require(rootPath.concat("/router/casephotoRouter.js")));
 app.use("/casestatus",require(rootPath.concat("/router/casestatusRouter.js")));
 
+//处理favicon.ico请求
+var favicon = require('serve-favicon');
+app.use(favicon(rootPath.concat('/public/favicon.ico')));
+
 //404错误中间件
 app.use((req, res, next) => {
     console.error(req.url.concat("not found"));
