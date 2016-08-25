@@ -1,0 +1,17 @@
+<ion-tabs class="tabs-icon-bottom tabs-color-active-positive">
+<ion-tab title="时间" icon-on="ion-android-home" icon-off="ion-android-home" ng-click="footerGo('delCase','案件时间设置')">
+	<ion-nav-view name="delCase" ></ion-nav-view>
+</ion-tab>
+<ion-tab title="随手拍" ng-click="footerGo('takePhoto','随手拍')" icon-on="ion-android-menu" icon-off="ion-android-menu">
+	<ion-nav-view name="takePhoto"></ion-nav-view>
+</ion-tab>
+<ion-tab title="文档" ng-click="footerGo('doc','我的文档')"  icon-on="ion-android-cart" icon-off="ion-android-cart">
+	<ion-nav-view name="doc"></ion-nav-view>
+</ion-tab>
+<ion-tab title="案件干系人" ng-click="footerGo('casePeople','案件干系人')" icon-on="ion-android-person" icon-off="ion-android-person">
+	<ion-nav-view name="casePeople"></ion-nav-view>
+</ion-tab>
+<ion-tab title="更多"  ng-click="footerGo('more','更多')"  icon-on="ion-refresh" icon-off="ion-refresh">
+	<ion-nav-view name="more"></ion-nav-view>
+</ion-tab>
+</ion-tabs>
