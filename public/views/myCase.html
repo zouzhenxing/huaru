@@ -1,0 +1,56 @@
+
+	<ion-view>
+		<ion-content>
+		<ion-list>
+			<div class="search" >
+				<div class="inp-wrap ">
+					<div class="big" ng-show="flag" ng-click="getFocus()"><img src="imgs/search.png"><span>搜索</span></div>
+						<input type="text"  ng-focus="focus()" ng-blur="blur()" name="" class="inp">
+					
+				</div>
+						
+					</div>
+		</ion-list>
+			
+			<ion-list>
+		<ion-item class="item
+			" ng-click="goToMyCase()" ng-repeat="item in data">
+			<div class="row">
+					<div class="col-80 fw-900 black fs-20">
+					<span>案件名称：</span><span>{{item.name}}</span>
+				</div>	
+				<div class="col-20 text-right positive">{{item.state}}</div>
+			</div>
+			<div class="row">
+				<div class="col-80">
+					<span>案件编号：</span><span>{{item.number}}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-80">
+					<span>办案主题：</span><span>{{item.sheme}}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-80">
+					<span>我方角色：</span><span>{{item.role}}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-80">
+					<span>主办律师：</span><span>{{item.lawyer}}</span>
+				</div>
+			</div>
+					
+					
+					
+					
+				
+		</ion-item>
+
+	</ion-list>
+		</ion-content>
+	</ion-view>
+	
+
+

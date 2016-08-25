@@ -1,0 +1,43 @@
+<ion-view view-title="主页" hide-nav-bar=true>
+  <ion-content class="userMain">
+
+                   <ion-side-menus drag-content="true">
+            <ion-side-menu-content>
+
+              <ion-header-bar class="bar bar-positive">
+                         <div class="buttons">
+                    <button class="button button-clear icon ion-ios-arrow-left" ng-click="goBack()"></button>
+                </div>
+                <h1 class="title">{{title}}</h1>
+                <div class="buttons">
+                    <button  ng-controller="SideMenuCtrl" class="button button-clear icon ion-navicon" ng-click="toggleMenu('Right')"></button>
+                </div>
+           
+               
+              </ion-header-bar>
+
+
+              <ion-content>
+                   <ion-nav-view></ion-nav-view>
+                  
+             </ion-content>
+            </ion-side-menu-content>
+
+            <ion-side-menu side="right">
+                <ion-content>
+                    <ion-list>
+                     <ion-item class="item item-divider">
+                        <p class="title">分类选择</p>
+                     </ion-item>
+                     <ion-item ng-repeat="item in classify" class="item item-icon-right backBlue" ng-class="{backDeepBlue:$index==selectedRow}" ng-click="goTo(item.state,false,item.content,$index)">
+                        {{item.content}}
+                        <i class="icon ion-ios-arrow-right"></i>
+                        
+                     </ion-item>
+                   
+                </ion-list>
+               </ion-content>
+            </ion-side-menu>
+        </ion-side-menus>
+  </ion-content>
+</ion-view>

@@ -1,466 +1,64 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mochawesome Report Card</title>
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+      <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/my.css">
+
+
+
     
-    <link rel="stylesheet" href="css/mochawesome.css">
-  </head>
-  <body>
+    <title>XXXXXX</title>
+</head>
 
-    <!-- NAVBAR -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="report-info-cnt">
-          <h1 class="report-title">huaru</h1>
-          <h3 class="report-date">Wednesday, August 24 2016, 12:05pm</h3>
-        </div>
-        <div class="nav-right">
-          <div class="quick-summary-cnt">
-              <ul class="list-unstyled quick-summary">
-                <li class="qs-item summary-duration" title="Duration">375<span>MS</span></li>
-                <li class="qs-item summary-suites" title="Suites">3</li>
-                <li class="qs-item summary-tests" title="Tests">15</li>
-                <li class="qs-item summary-passes" title="Passed" data-filter="passed">15</li>
-                <li class="qs-item summary-failures" title="Failed" data-filter="failed">0</li>
-                <li class="qs-item summary-pending" title="Pending" data-filter="pending">0</li>
-              </ul>          </div>
-          <button class="nav-menu-btn open-menu"><i class="icon-menu"></i></button>
-        </div>
-      </div>
-    </div>
+<body>
+   
 
-    <!-- Report Summary -->
-    <div class="summary">
-      <div class="container">
-          <div class="row">
-            <div class="summary-col summary-duration">
-              <h1 class="summary-count">375<span>MS</span></h1>
-              <h4 class="summary-label">MS</h4>
-            </div>
-            <div class="summary-col summary-suites" title="Suites">
-              <h1 class="summary-count">3</h1>
-              <h4 class="summary-label">Suites</h4>
-            </div>
-            <div class="summary-col summary-tests" title="Tests">
-              <h1 class="summary-count">15</h1>
-              <h4 class="summary-label">Tests</h4>
-            </div>
-            <div class="summary-col summary-passes" data-filter="passed" title="Passed">
-              <h1 class="summary-count">15</h1>
-              <h4 class="summary-label">Passed</h4>
-            </div>
-            <div class="summary-col summary-failures" data-filter="failed" title="Failed">
-              <h1 class="summary-count">0</h1>
-              <h4 class="summary-label">Failed</h4>
-            </div>
-            <div class="summary-col summary-pending" data-filter="pending" title="Pending">
-              <h1 class="summary-count">0</h1>
-              <h4 class="summary-label">Pending</h4>
-            </div>
-          </div>      </div>
-    </div>
-    <div class="statusbar">
-      <div class="container">
-          <div class="row">
-            <div class="status-item status-item-pending-pct">0% Pending</div>
-            <div class="status-item status-item-passing-pct success">100% Passing</div>
-          </div>      </div>
-    </div>
+    <ion-nav-view></ion-nav-view>
+    	
+</body>
+<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+   
+    <script type="text/javascript" src="./js/app.js"></script>
+  
 
-    <!-- Suites -->
-    <div class="details container">
-            <section class="suite-wrap">
-          <div id="a876a4da-6623-4863-8c63-58ae76a53a57" class="suite has-tests has-passed">
-            <h3 class="suite-title">casephoto表测试</h3>
-            <h5 class="suite-filename">\test\casephoto.test.js</h5>
-            <!-- Suite Chart -->
-            <div class="suite-chart-wrap">
-              <canvas id="a876a4da-6623-4863-8c63-58ae76a53a57" class="suite-chart" width="50" height="50" data-total-passes="5" data-total-failures="0" data-total-pending="0" data-total-skipped="0"></canvas>
-            </div>
-            <div class="suite-data-wrap">
-              <!-- Suite Summary -->
-              <ul class="suite-summary list-unstyled">
-                <li class="suite-summary-item duration">218 ms</li>
-                <li class="suite-summary-item tests">5</li>
-                <li class="suite-summary-item passed">5</li>
-                <li class="suite-summary-item failed">0</li>
-                <li class="suite-summary-item pending">0</li>
-              </ul>
-              <!-- Test Info -->
-              <div class="suite-test-wrap">
-                <div class="suite-test-header" data-toggle="collapse" data-target="#a876a4da-6623-4863-8c63-58ae76a53a57-test-list">
-                  <h4 class="suite-test-header-title">Tests</h4>
-                </div>
-                <div id="a876a4da-6623-4863-8c63-58ae76a53a57-test-list" class="list-group test-list collapse in">
-                    <div id="85b4814f-c604-4d35-8031-9c5ff13d06bc" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              增加casephoto测试
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#85b4814f-c604-4d35-8031-9c5ff13d06bc > .test-code.collapse">Code</button>
-              <span class="test-duration slow">172 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-comment">//请填写增加对象let body = "name=admin@yuanku.org&amp;password=admin";</span><br><span class="hljs-keyword">let</span> body = <span class="hljs-string">"cid=1&amp;imgurl=img/abc.jpg"</span>;<br><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casephoto'</span>),{method:<span class="hljs-string">'post'</span>,headers:header,body:body}).then(( res )=&gt; {<br>    <span class="hljs-keyword">return</span> res.json();<br>}).then((json)=&gt; {<br>    <span class="hljs-built_in">console</span>.log(json);<br>    expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>});</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="230a3769-c5f1-4d6f-b5bd-6f4ada9a69a2" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID获取casephoto
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#230a3769-c5f1-4d6f-b5bd-6f4ada9a69a2 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">15 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casephoto/1'</span>)).then(( res )=&gt; {<br>      <span class="hljs-keyword">return</span> res.json();<br>  }).then((json)=&gt; {<br>      <span class="hljs-built_in">console</span>.log(json);<br>      expect(json.data).to.not.be.empty;<br>  });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="00c651cf-092a-4032-8f0c-2a1ca15e4223" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID修改casephoto
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#00c651cf-092a-4032-8f0c-2a1ca15e4223 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">16 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-comment">//请填写修改对象let body = "name=update@yuanku.org&amp;password=update";</span><br><span class="hljs-keyword">let</span> body = <span class="hljs-string">"cid=1&amp;imgurl=img/bcd.jpg"</span>;     <br><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casephoto/1'</span>),{method:<span class="hljs-string">'put'</span>,headers:header,body:body}).then(( res )=&gt; {<br>    <span class="hljs-keyword">return</span> res.json();<br>}).then((json)=&gt; {<br>    <span class="hljs-built_in">console</span>.log(json);<br>    expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>});</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="dbfcf959-9613-4c28-905b-31735754fdcd" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID删除casephoto
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#dbfcf959-9613-4c28-905b-31735754fdcd > .test-code.collapse">Code</button>
-              <span class="test-duration fast">0 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casephoto/0'</span>),{method:<span class="hljs-string">'delete'</span>}).then(( res )=&gt; {<br>         <span class="hljs-keyword">return</span> res.json();<br>     }).then((json)=&gt; {<br>         <span class="hljs-built_in">console</span>.log(json);<br>         expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>     });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="68bbee1c-e9cc-45d1-9e0f-518a2a9afc85" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              查询casephoto
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#68bbee1c-e9cc-45d1-9e0f-518a2a9afc85 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">15 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casephoto'</span>)).then(( res )=&gt; {<br>         <span class="hljs-keyword">return</span> res.json();<br>     }).then((json)=&gt; {<br>         <span class="hljs-built_in">console</span>.log(json);<br>         expect(json).to.not.be.empty;<br>     });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>        </div>
-              </div>
-            </div>
-        
-        
-          </div>
-        </section>
-            <section class="suite-wrap">
-          <div id="1e41ba19-15cc-4c2f-817f-f8601d0ce865" class="suite has-tests has-passed">
-            <h3 class="suite-title">casestatus表测试</h3>
-            <h5 class="suite-filename">\test\casestatus.test.js</h5>
-            <!-- Suite Chart -->
-            <div class="suite-chart-wrap">
-              <canvas id="1e41ba19-15cc-4c2f-817f-f8601d0ce865" class="suite-chart" width="50" height="50" data-total-passes="5" data-total-failures="0" data-total-pending="0" data-total-skipped="0"></canvas>
-            </div>
-            <div class="suite-data-wrap">
-              <!-- Suite Summary -->
-              <ul class="suite-summary list-unstyled">
-                <li class="suite-summary-item duration">63 ms</li>
-                <li class="suite-summary-item tests">5</li>
-                <li class="suite-summary-item passed">5</li>
-                <li class="suite-summary-item failed">0</li>
-                <li class="suite-summary-item pending">0</li>
-              </ul>
-              <!-- Test Info -->
-              <div class="suite-test-wrap">
-                <div class="suite-test-header" data-toggle="collapse" data-target="#1e41ba19-15cc-4c2f-817f-f8601d0ce865-test-list">
-                  <h4 class="suite-test-header-title">Tests</h4>
-                </div>
-                <div id="1e41ba19-15cc-4c2f-817f-f8601d0ce865-test-list" class="list-group test-list collapse in">
-                    <div id="9ed72c13-a3a3-4de7-9d51-d38fa7a5fb7c" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              增加casestatus测试
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#9ed72c13-a3a3-4de7-9d51-d38fa7a5fb7c > .test-code.collapse">Code</button>
-              <span class="test-duration fast">16 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-comment">//请填写增加对象let body = "name=admin@yuanku.org&amp;password=admin";</span><br><span class="hljs-keyword">let</span> body = <span class="hljs-string">"cid=1&amp;status=1&amp;info=测试"</span>;<br><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casestatus'</span>),{method:<span class="hljs-string">'post'</span>,headers:header,body:body}).then(( res )=&gt; {<br>    <span class="hljs-keyword">return</span> res.json();<br>}).then((json)=&gt; {<br>    <span class="hljs-built_in">console</span>.log(json);<br>    expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>});</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="1f4cae8e-e9d1-44a8-8c79-90598f730359" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID获取casestatus
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#1f4cae8e-e9d1-44a8-8c79-90598f730359 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">16 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casestatus/1'</span>)).then(( res )=&gt; {<br>      <span class="hljs-keyword">return</span> res.json();<br>  }).then((json)=&gt; {<br>      <span class="hljs-built_in">console</span>.log(json);<br>      expect(json.data).to.not.be.empty;<br>  });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="544e8c8b-fdfd-4f48-8713-4031224ed598" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID修改casestatus
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#544e8c8b-fdfd-4f48-8713-4031224ed598 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">0 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-comment">//请填写修改对象let body = "name=update@yuanku.org&amp;password=update";</span><br><span class="hljs-keyword">let</span> body = <span class="hljs-string">"cid=2&amp;status=2&amp;info=测试2"</span>;     <br><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casestatus/1'</span>),{method:<span class="hljs-string">'put'</span>,headers:header,body:body}).then(( res )=&gt; {<br>    <span class="hljs-keyword">return</span> res.json();<br>}).then((json)=&gt; {<br>    <span class="hljs-built_in">console</span>.log(json);<br>    expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>});</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="0ff94eb9-4991-449b-8188-30a68612a286" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID删除casestatus
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#0ff94eb9-4991-449b-8188-30a68612a286 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">15 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casestatus/0'</span>),{method:<span class="hljs-string">'delete'</span>}).then(( res )=&gt; {<br>         <span class="hljs-keyword">return</span> res.json();<br>     }).then((json)=&gt; {<br>         <span class="hljs-built_in">console</span>.log(json);<br>         expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>     });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="d2722a06-2e05-45db-bb91-5c09b944be8f" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              查询casestatus
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#d2722a06-2e05-45db-bb91-5c09b944be8f > .test-code.collapse">Code</button>
-              <span class="test-duration fast">16 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/casestatus'</span>)).then(( res )=&gt; {<br>         <span class="hljs-keyword">return</span> res.json();<br>     }).then((json)=&gt; {<br>         <span class="hljs-built_in">console</span>.log(json);<br>         expect(json).to.not.be.empty;<br>     });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>        </div>
-              </div>
-            </div>
-        
-        
-          </div>
-        </section>
-            <section class="suite-wrap">
-          <div id="2dd2cff4-0cdc-4dec-a3fc-3850b64d0f7c" class="suite has-tests has-passed">
-            <h3 class="suite-title">hrcase表测试</h3>
-            <h5 class="suite-filename">\test\hrcase.test.js</h5>
-            <!-- Suite Chart -->
-            <div class="suite-chart-wrap">
-              <canvas id="2dd2cff4-0cdc-4dec-a3fc-3850b64d0f7c" class="suite-chart" width="50" height="50" data-total-passes="5" data-total-failures="0" data-total-pending="0" data-total-skipped="0"></canvas>
-            </div>
-            <div class="suite-data-wrap">
-              <!-- Suite Summary -->
-              <ul class="suite-summary list-unstyled">
-                <li class="suite-summary-item duration">47 ms</li>
-                <li class="suite-summary-item tests">5</li>
-                <li class="suite-summary-item passed">5</li>
-                <li class="suite-summary-item failed">0</li>
-                <li class="suite-summary-item pending">0</li>
-              </ul>
-              <!-- Test Info -->
-              <div class="suite-test-wrap">
-                <div class="suite-test-header" data-toggle="collapse" data-target="#2dd2cff4-0cdc-4dec-a3fc-3850b64d0f7c-test-list">
-                  <h4 class="suite-test-header-title">Tests</h4>
-                </div>
-                <div id="2dd2cff4-0cdc-4dec-a3fc-3850b64d0f7c-test-list" class="list-group test-list collapse in">
-                    <div id="3edc2495-97d4-43b5-8b0b-dc833268ca66" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              增加hrcase测试
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#3edc2495-97d4-43b5-8b0b-dc833268ca66 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">15 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-comment">//请填写增加对象let body = "name=admin@yuanku.org&amp;password=admin";</span><br><span class="hljs-keyword">let</span> body = <span class="hljs-string">"weparty=张三&amp;otherparty=李四&amp;thirdparty=王五&amp;casesubject=1&amp;organizers=华北大区&amp;casestatus=1"</span>;<br><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/hrcase'</span>),{method:<span class="hljs-string">'post'</span>,headers:header,body:body}).then(( res )=&gt; {<br>    <span class="hljs-keyword">return</span> res.json();<br>}).then((json)=&gt; {<br>    <span class="hljs-built_in">console</span>.log(json);<br>    expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>});</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="97c4833b-585a-48ed-8860-1af575461cfc" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID获取hrcase
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#97c4833b-585a-48ed-8860-1af575461cfc > .test-code.collapse">Code</button>
-              <span class="test-duration fast">0 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/hrcase/1'</span>)).then(( res )=&gt; {<br>      <span class="hljs-keyword">return</span> res.json();<br>  }).then((json)=&gt; {<br>      <span class="hljs-built_in">console</span>.log(json);<br>      expect(json.data).to.not.be.empty;<br>  });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="b4d93b23-b4a3-481b-8477-bcbba1445543" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID修改hrcase
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#b4d93b23-b4a3-481b-8477-bcbba1445543 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">16 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-comment">//请填写修改对象let body = "name=update@yuanku.org&amp;password=update";</span><br><span class="hljs-keyword">let</span> body = <span class="hljs-string">"weparty=张三1&amp;otherparty=李四1&amp;thirdparty=王五1&amp;casesubject=2&amp;organizers=华北大区1&amp;casestatus=2"</span>;     <br><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/hrcase/1'</span>),{method:<span class="hljs-string">'put'</span>,headers:header,body:body}).then(( res )=&gt; {<br>    <span class="hljs-keyword">return</span> res.json();<br>}).then((json)=&gt; {<br>    <span class="hljs-built_in">console</span>.log(json);<br>    expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>});</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="a5a4b13a-5a88-4401-bb15-14eaf5f2f8a9" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              根据ID删除hrcase
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#a5a4b13a-5a88-4401-bb15-14eaf5f2f8a9 > .test-code.collapse">Code</button>
-              <span class="test-duration fast">16 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/hrcase/0'</span>),{method:<span class="hljs-string">'delete'</span>}).then(( res )=&gt; {<br>         <span class="hljs-keyword">return</span> res.json();<br>     }).then((json)=&gt; {<br>         <span class="hljs-built_in">console</span>.log(json);<br>         expect(json).to.be.deep.equal({<span class="hljs-string">"code"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"msg"</span>:<span class="hljs-string">"操作成功!"</span>});<br>     });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>            <div id="dc64a73c-b893-4ecd-8494-7bba7e20445f" class="list-group-item test passed">
-          <!-- Test Heading -->
-          <div class="test-heading">
-            <h4 class="test-title">
-              <span class="text-muted hidden"> it </span>
-              查询hrcase
-            </h4>
-            <div class="pull-right">
-              <button class="btn btn-link btn-sm toggle-btn toggle-code collapsed" data-toggle="collapse" data-target="#dc64a73c-b893-4ecd-8494-7bba7e20445f > .test-code.collapse">Code</button>
-              <span class="test-duration fast">0 ms</span>
-            </div>
-          </div>
-          <!-- Test Errors -->
-          <!-- Test Code -->
-          <div class="test-code collapse">
-            <pre><code class="hljs javascript small"><span class="hljs-keyword">return</span> fetch(rooturl.concat(<span class="hljs-string">'/hrcase'</span>)).then(( res )=&gt; {<br>         <span class="hljs-keyword">return</span> res.json();<br>     }).then((json)=&gt; {<br>         <span class="hljs-built_in">console</span>.log(json);<br>         expect(json).to.not.be.empty;<br>     });</code></pre>
-          </div>
-          <!-- Test Error Stack -->
-        </div>        </div>
-              </div>
-            </div>
-        
-        
-          </div>
-        </section>
-    </div>
-
-    <footer>
-      <div class="container">
-        <p>Report generated by <a href="http://adamgruber.github.io/mochawesome/" target="_blank">mochawesome</a>.<br>Designed and built by <a href="https://github.com/adamgruber" target="_blank">adamgruber</a>. &copy;2016.</p>
-      </div>
-    </footer>
-
-    <!-- Nav Menu -->
-    <div class="nav-menu-wrap">
-      <div class="menu-overlay close-menu"></div>
-      <nav class="menu">
-        <button class="nav-menu-btn close-menu"><i class="icon-failed"></i></button>
-        <ul class="list-unstyled main-menu">
-                <li class="nav-menu-item">
-                <a href="#a876a4da-6623-4863-8c63-58ae76a53a57" class="nav-menu-item-link has-passes">casephoto表测试</a>
-            </li>
-                <li class="nav-menu-item">
-                <a href="#1e41ba19-15cc-4c2f-817f-f8601d0ce865" class="nav-menu-item-link has-passes">casestatus表测试</a>
-            </li>
-                <li class="nav-menu-item">
-                <a href="#2dd2cff4-0cdc-4dec-a3fc-3850b64d0f7c" class="nav-menu-item-link has-passes">hrcase表测试</a>
-            </li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Scripts -->
-    <script src="js/vendor.js"></script>
-    <script src="js/mochawesome.js"></script>
-  </body>
 </html>
