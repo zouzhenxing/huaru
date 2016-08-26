@@ -2,6 +2,8 @@
 
 var expect = require('chai').expect;
 var fetch = require("node-fetch");
+var fs = require("fs");
+var FormData = require('form-data');
 
 var rooturl = "http://localhost:8088";
 var header = {"Content-type":"application/x-www-form-urlencoded"};
@@ -18,8 +20,12 @@ Field:imgurl Type:varchar(200) Null:YES Key: Default: Extra:
 describe('casephoto表测试',() => {
     it("增加casephoto测试",() => {
         //请填写增加对象let body = "name=admin@yuanku.org&password=admin";
-        let body = "cid=1&imgurl=img/abc.jpg";
-        return fetch(rooturl.concat('/casephoto'),{method:'post',headers:header,body:body}).then(( res )=> {
+        var form = new FormData();
+        form.append("cid",1);
+        form.append("imgurl",fs.createReadStream("./test/icon.png"));
+        let header = {"Content-type":"multipart/form-data"};
+
+        return fetch(rooturl.concat('/casephoto'),{method:'post',body:form}).then(( res )=> {
             return res.json();
         }).then((json)=> {
             console.log(json);

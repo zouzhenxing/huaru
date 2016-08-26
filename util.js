@@ -30,9 +30,9 @@ var mysql = require("mysql");
 Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 exports.pool = mysql.createPool({
-    host     : '120.24.243.130',
+    host     : '127.0.0.1',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'hurun',
     dateStrings : 'DATETIME'
 });
@@ -57,6 +57,27 @@ var sqlFormat = function (query, values) {
         return txt;
     }.bind(this));
 };
+
+//配置文件上传
+var multer = require('multer');
+exports.upfile = () => {
+    var storage = multer.diskStorage({
+        //设置上传后文件路径，uploads文件夹会自动创建。
+        destination: function (req, file, cb) {
+            cb(null, './public/uploads')
+        }, 
+        //给上传文件重命名，获取添加后缀名
+        filename: function (req, file, cb) {
+            var fileFormat = (file.originalname).split(".");
+            cb(null, Date.now() + "." + fileFormat[fileFormat.length - 1]);
+        }
+    });
+
+    return multer({
+        storage: storage,
+        limits:{}
+    });
+}
 
 /**
  * 成功返回

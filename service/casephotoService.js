@@ -34,10 +34,10 @@ exports.add = (req,res,next) => {
     let conn;
     Promise.coroutine(function* () {
         conn = yield util.getConnect();
-        yield casephotoModule.add(conn,req.body);
+        yield casephotoModule.add(conn,{cid:req.body.cid,imgurl:req.file.filename});
         return res.json(config.message.success);
     })().catch(( err )=> {
-        console.log(err);
+        console.log(err.stack);
         return res.json(config.message.error);
     }).finally(()=> {
         conn.release();
