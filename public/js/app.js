@@ -62,6 +62,7 @@ $ionicConfigProvider.platform.android.views.transition('android');
                     }  
                     // 底部跳转按钮
                      $scope.footerGo=function(state,title){
+
                               $state.go("userMain.tabs-main."+state);
                               $scope.title=title;
                       }
@@ -97,9 +98,6 @@ $ionicConfigProvider.platform.android.views.transition('android');
     url:"/myCase",
     templateUrl:"./views/myCase.html",
     controller:function($scope,$state){
-     
-        var focus=false;
-        $scope.flag=true;
         $scope.data=[
             {name:"民事纠纷案",number:"001",sheme:"办案主题",role:"原告",lawyer:"张三",state:"请上报"},
              {name:"民事纠纷案",number:"002",sheme:"办案主题",role:"原告",lawyer:"张三",state:"请上报"},
@@ -111,16 +109,7 @@ $ionicConfigProvider.platform.android.views.transition('android');
         $state.go("userMain.tabs-main.delCase");
          $scope.$emit("changeTitle",{title:"案件时间设置"})
       }
-      $scope.focus=function(){
-            $scope.flag=false;          
-      }
-      $scope.blur=function(){
-        $scope.flag=true;
-      }
-      $scope.getFocus=function(){
-        $scope.flag=false;
-      
-      }
+     
     }
   })
   .state("userMain.search",{
@@ -177,9 +166,27 @@ $ionicConfigProvider.platform.android.views.transition('android');
     views:{
       "delCase":{
         templateUrl:"./views/delCase.html",
-        controller:function(){
-
+        controller:function($scope){
+                $scope.data=[
+                  {name:"收到起诉日期",time:"2016-08-01"},
+                  {name:"答辩截止日期",time:"2016-08-01"},
+                  {name:"举证截止日期",time:"2016-08-01"},
+                  {name:"反诉截止日期",time:"2016-08-01"},
+                  {name:"一审开庭日期",time:"2016-08-01"},
+                  {name:"一审（重审）开庭时间",time:"2016-08-01"}
+                 
+                ]
+                 $scope.add=function(){
+               $scope.data.push({name:"新增的",time:(function(){
+                var d=new Date();
+                var y=d.getFullYear();
+                var m=d.getMonth();
+                var r=d.getDate();
+                return y+"-"+(m+1)+"-"+r;
+               })()})
+            }        
         }
+
       }
     }
   })
@@ -188,8 +195,45 @@ $ionicConfigProvider.platform.android.views.transition('android');
     views:{
       "takePhoto":{
         templateUrl:"./views/takePhoto.html",
-        controller:function(){
+        controller:function($scope){
+          var wSrc=["./imgs/add.png","./imgs/reduce.png"];
+  
+            $scope.data=[
+                {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
+                 {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
+                  {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
+                   {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
+                    {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]}
+            ]
 
+            $scope.toggle=function(flagI){
+             var src=flagI.replace(/flag/,"wSrc");
+               if(flagI=='flag2'&&this.item.flag2==true){
+                      this.item.flag2=false;
+                      this.item.flag3=false;
+                      this.item.flag4=false;
+                       this.item.wSrc2=wSrc[0];
+                       this.item.wSrc3=wSrc[0];
+                     
+              }else if(flagI=='flag3'&&this.item.flag3==true){
+              
+                    this.item.flag3=false;
+                    this.item.flag4=false;
+                     this.item.wSrc3=wSrc[0];
+
+              }
+
+              else{
+                this.item[flagI]=!this.item[flagI];
+                 if(this.item[src]==wSrc[0]){
+                        this.item[src]=wSrc[1];
+                        
+                      }else{
+                        this.item[src]=wSrc[0];
+                      }
+               
+            }
+              }
         }
       }
     }
@@ -216,11 +260,11 @@ $ionicConfigProvider.platform.android.views.transition('android');
       }
     }
   })
-  .state("userMain.tabs-main.more",{
-    url:"/more",
+  .state("userMain.tabs-main.lawyerWay",{
+    url:"/lawyerWay",
     views:{
-      "more":{
-        templateUrl:"./views/more.html",
+      "lawyerWay":{
+        templateUrl:"./views/lawyerWay.html",
         controller:function(){
 
         }

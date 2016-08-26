@@ -1,5 +1,20 @@
 <ion-view>
 	<ion-content>
-		<h1>delCase</h1>
+		<ion-list>
+			<ion-item class="item" ng-repeat="item in data">
+				<div class="row">
+					<span class="col-50">{{item.name}}：</span>
+					<span class="col-40 text-right">{{item.time}}</span>
+					<span class="col-10 text-right"><i class="icon ion-ios-arrow-right"></i></span>
+				</div>
+				
+			</ion-item>
+			<ion-item>
+				<div class="row">
+						<span class="col-100 text-center" ng-click="add()">新增事项</span>
+				</div>
+			
+			</ion-item>
+		</ion-list>
 	</ion-content>
 </ion-view>
