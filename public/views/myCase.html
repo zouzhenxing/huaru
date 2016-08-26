@@ -1,15 +1,16 @@
 
 	<ion-view>
+	
 		<ion-content>
 		<ion-list>
-			<div class="search" >
-				<div class="inp-wrap ">
-					<div class="big" ng-show="flag" ng-click="getFocus()"><img src="imgs/search.png"><span>搜索</span></div>
-						<input type="text"  ng-focus="focus()" ng-blur="blur()" name="" class="inp">
-					
-				</div>
-						
-					</div>
+		<div class="search" >
+			
+			 <label class="item item-input inp-wrap">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="搜索" ng-model="txt" ng-keydown="search(e)">
+        </label>
+        
+        </div>
 		</ion-list>
 			
 			<ion-list>

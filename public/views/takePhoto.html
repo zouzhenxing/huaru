@@ -1,5 +1,25 @@
 <ion-view>
 	<ion-content>
-		<h1>takePhoto</h1>
+		<ion-list>
+			<ion-item class="item" ng-repeat="item in data">
+				<div ng-click="toggle('flag2')" class="col-70">
+					<span><img src="{{item.wSrc2}}"></span>
+					<span>{{item.name1}}</span>
+				</div>
+
+				<div ng-click="toggle('flag3')" class="col-70 f2" ng-show="item.flag2">
+					<span><img src="{{item.wSrc3}}"></span>
+					<span>{{item.name2}}</span>
+				</div>
+				<div ng-show="item.flag3" ng-click="toggle('flag4')" class="col-70 f3">
+					<span><img src="{{item.wSrc4}}"></span>
+					<span>{{item.name3}}</span>
+				</div>
+
+				<div class="col-70 f4" ng-show="item.flag4">我是内容</div>
+				
+			</ion-item>
+			
+		</ion-list>
 	</ion-content>
 </ion-view>

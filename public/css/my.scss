@@ -56,43 +56,8 @@
 	.inp-wrap{
 		width: 90%;
 		height: 80%;
-		position:relative;
-		.inp{
-		width: 100%;
-		height: 100%;
 		border-radius:20px;
-		text-indent: 10px;
-		background:white; 
-		}
-		.big{
-		width: 75px;
-		height: 40px;
-		font-size:16px;
-		position: absolute;
-		margin:auto;
-		left: 0;
-		right:0;
-		top:0;
-		bottom: 0;
-		display: flex;
-		align-content:space-around;
-		img{
-			width: 25px;
-			height: 25px;
-			margin-top: 7px;
-		}
-		span{
-			width: 50px;
-			height: 40px;
-			line-height:40px;
-			display: inline-block;
-			padding: 0;
-			margin: 0;
-			font-size: 20px;
-			color:#aaa;
-		}
-	}
-
+		
 	}
 }
 .fw-900{
@@ -103,4 +68,21 @@
 }
 .fs-20{
 	font-size:20px;
+}
+.hui{
+	background:#E6E6E6;
+}
+.hui 
+	.tab-item{
+		display: flex;
+		align-items:center;
+		justify-content: center;
+		img{
+		width:30px;
+		height:30px;
+	}
+
+}
+@for $i from 2 through 4 {
+  .f#{$i} { margin-left: 5% * $i; }
 }

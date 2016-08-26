@@ -1,17 +1,42 @@
 <ion-tabs class="tabs-icon-bottom tabs-color-active-positive">
-<ion-tab title="时间" icon-on="ion-android-home" icon-off="ion-android-home" ng-click="footerGo('delCase','案件时间设置')">
+<ion-tab title="时间" icon-on="ion-android-time" icon-off="ion-android-time" ng-click="footerGo('delCase','案件时间设置')">
 	<ion-nav-view name="delCase" ></ion-nav-view>
 </ion-tab>
-<ion-tab title="随手拍" ng-click="footerGo('takePhoto','随手拍')" icon-on="ion-android-menu" icon-off="ion-android-menu">
+<ion-tab title="随手拍" ng-click="footerGo('takePhoto','随手拍')" icon-on="ion-camera" icon-off="ion-camera">
 	<ion-nav-view name="takePhoto"></ion-nav-view>
 </ion-tab>
-<ion-tab title="文档" ng-click="footerGo('doc','我的文档')"  icon-on="ion-android-cart" icon-off="ion-android-cart">
+<ion-tab title="文档" ng-click="footerGo('doc','我的文档')"  icon-on="ion-folder" icon-off="ion-folder">
 	<ion-nav-view name="doc"></ion-nav-view>
 </ion-tab>
-<ion-tab title="案件干系人" ng-click="footerGo('casePeople','案件干系人')" icon-on="ion-android-person" icon-off="ion-android-person">
+<ion-tab title="案件干系人" ng-click="footerGo('casePeople','案件干系人')" icon-on="ion-ios-people" icon-off="ion-ios-people">
 	<ion-nav-view name="casePeople"></ion-nav-view>
 </ion-tab>
-<ion-tab title="更多"  ng-click="footerGo('more','更多')"  icon-on="ion-refresh" icon-off="ion-refresh">
-	<ion-nav-view name="more"></ion-nav-view>
+<ion-tab title="外聘律师"  ng-click="footerGo('lawyerWay','外聘律师流程')"  icon-on="ion-android-person" icon-off="ion-android-person">
+	<ion-nav-view name="lawyerWay"></ion-nav-view>
 </ion-tab>
 </ion-tabs>
+
+<!-- <div class="tabs-striped hui ">
+      <div class="tabs">
+        <a class="tab-item active"  ng-click="footerGo('delCase','案件时间设置')">
+          <img src="./imgs/time.png">
+          <ion-nav-view name="more"></ion-nav-view>
+        </a>
+        <a class="tab-item" ng-click="footerGo('takePhoto','随手拍')">
+         <img src="./imgs/photo.png">
+         <ion-nav-view name="more"></ion-nav-view>
+        </a>
+        <a class="tab-item"  ng-click="footerGo('doc','文档')">
+          <img src="./imgs/doc1.png">
+          <ion-nav-view name="more"></ion-nav-view>
+        </a>
+        <a class="tab-item"  ng-click="footerGo('casePeople','案件干系人')">
+          <img src="./imgs/ren1.png">
+          <ion-nav-view name="more"></ion-nav-view>
+        </a>
+        <a class="tab-item" ng-click="footerGo('lawyerWay','外聘律师流程')">
+          <img src="./imgs/jin1.png">
+          <ion-nav-view name="more"></ion-nav-view>
+        </a>
+      </div>
+    </div> -->
