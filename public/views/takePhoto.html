@@ -2,24 +2,90 @@
 	<ion-content>
 		<ion-list>
 			<ion-item class="item" ng-repeat="item in data">
-				<div ng-click="toggle('flag2')" class="col-70">
-					<span><img src="{{item.wSrc2}}"></span>
-					<span>{{item.name1}}</span>
-				</div>
+			<!-- 1层 -->
+					<div class="col-70" ng-click="toggle($event,'flag2')">
+							<span><img src="{{item.wSrc2}}"></span>
+							<span>{{item.name1}}</span>
+							<!-- 2层 -->
+							<br>
+							<div class="col-70 f2" ng-click="toggle($event,'flag3_1')" ng-show="item.flag2">
+								<span><img src="{{item.wSrc3_1}}"></span>
+								<span>{{item.name2_1}}</span>
+								<!-- 3层 -->
+								<br>
+									<div class="col-70 f3" ng-click="toggle($event,'flag4_1')" ng-show="item.flag3_1">
+										<span><img src="{{item.wSrc4_1}}"></span>
+										<span>{{item.name3_1}}</span>
+										<br>
+										<div class="f4" ng-show="item.flag4_1">
+											<img ng-repeat="srcItem in item.srcs" src="{{srcItem.src}}">
+											<img src="./imgs/bigadd.png" ng-click="add_img()">
 
-				<div ng-click="toggle('flag3')" class="col-70 f2" ng-show="item.flag2">
-					<span><img src="{{item.wSrc3}}"></span>
-					<span>{{item.name2}}</span>
-				</div>
-				<div ng-show="item.flag3" ng-click="toggle('flag4')" class="col-70 f3">
-					<span><img src="{{item.wSrc4}}"></span>
-					<span>{{item.name3}}</span>
-				</div>
+										</div>
+									</div>
 
-				<div class="col-70 f4" ng-show="item.flag4">我是内容</div>
-				
+									<div class="col-70 f3" ng-click="toggle($event,'flag4_2')" ng-show="item.flag3_1">
+										<span><img src="{{item.wSrc4_2}}"></span>
+										<span>{{item.name3_2}}</span>
+										<br>
+										<div class="f4" ng-show="item.flag4_2">
+											<img ng-repeat="srcItem in item.srcs" src="{{srcItem.src}}">
+											<img src="./imgs/bigadd.png"  ng-click="add_img()">
+										</div>
+									</div>
+
+									<div class="col-70 f3" ng-click="toggle($event,'flag4_3')" ng-show="item.flag3_1">
+										<span><img src="{{item.wSrc4_3}}"></span>
+										<span>{{item.name3_3}}</span>
+										<br>
+										<div class="f4" ng-show="item.flag4_3">
+											<img ng-repeat="srcItem in item.srcs" src="{{srcItem.src}}">
+											<img src="./imgs/bigadd.png"  ng-click="add_img()">
+										</div>
+									</div>
+
+
+
+
+							</div>
+							<!-- 2层 -->
+							<div class="col-70 f2" ng-click="toggle($event,'flag3_2')" ng-show="item.flag2">
+								<span><img src="{{item.wSrc3_2}}"></span>
+								<span>{{item.name2_2}}</span>
+								<!-- 3层 -->
+								<br>
+									<div class="col-70 f3" ng-click="toggle($event,'flag4_4')" ng-show="item.flag3_2">
+										<span><img src="{{item.wSrc4_4}}"></span>
+										<span>{{item.name3_1}}</span>
+										<br>
+										<div class="f4" ng-show="item.flag4_4">
+											<img ng-repeat="srcItem in item.srcs" src="{{srcItem.src}}">
+											<img src="./imgs/bigadd.png"  ng-click="add_img()">
+										</div>
+									</div>
+
+										<div class="col-70 f3" ng-click="toggle($event,'flag4_5')" ng-show="item.flag3_2">
+										<span><img src="{{item.wSrc4_5}}"></span>
+										<span>{{item.name3_2}}</span>
+										<br>
+										<div class="f4" ng-show="item.flag4_5">
+											<img ng-repeat="srcItem in item.srcs" src="{{srcItem.src}}">
+											<img src="./imgs/bigadd.png"  ng-click="add_img()">
+										</div>
+									</div>
+
+										<div class="col-70 f3" ng-click="toggle($event,'flag4_6')" ng-show="item.flag3_2">
+										<span><img src="{{item.wSrc4_6}}"></span>
+										<span>{{item.name3_2}}</span>
+										<br>
+										<div class="f4" ng-show="item.flag4_6">
+											<img ng-repeat="srcItem in item.srcs" src="{{srcItem.src}}">
+											<img src="./imgs/bigadd.png"  ng-click="add_img()">
+										</div>
+									</div>
+							</div>
+					</div>
 			</ion-item>
-			
 		</ion-list>
 	</ion-content>
 </ion-view>

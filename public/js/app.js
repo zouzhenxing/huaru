@@ -4,7 +4,18 @@ angular.module("myApp",["ionic"])
     $ionicSideMenuDelegate["toggle"+dir]();
   }
 })
-
+.controller("search_ctrl",function($scope){
+      $scope.search=function(e,id){
+              var e=e||window.event;
+              var txt=$scope.txt;
+              if(id){
+                 alert(id);
+               }else if(e.keyCode=="13"){
+                  alert(txt);
+               }
+             
+            }
+})
 .config(function($stateProvider,$urlRouterProvider,$ionicConfigProvider){
 //tabs位置配置
 $ionicConfigProvider.platform.ios.tabs.style('standard');
@@ -46,15 +57,15 @@ $ionicConfigProvider.platform.android.views.transition('android');
                         {content:"帮助",state:"help"},
                         
                   ] ;
-
+                    $scope.$on("checkState",function(e,b){
+                        checkState=b.checkState;
+                    })
                   // 分类跳转函数
                    $scope.goTo=function(state,flag,content,row){
                    $scope.selectedRow = row;
-
                         !flag&&$ionicSideMenuDelegate.toggleRight()              
                     if(state!=checkState||state=="myCase"){
                        checkState=state;
-                      
                       $state.go("userMain."+state);
         
                       $scope.title=content;
@@ -69,11 +80,16 @@ $ionicConfigProvider.platform.android.views.transition('android');
                       $scope.$on("changeTitle",function(e,d){
                         $scope.title=d.title;
                       })
+
+                        $scope.$on("change_bg",function(){
+                        $scope.selectedRow=1;
+                      })
+
                       // 后退按钮
                        $scope.goBack=function(){
-                          alert(checkState);
                             $state.go("userMain.main");
                             $scope.title="主页";
+                            checkState='main';
                             $scope.selectedRow = 0;
                     }
         }
@@ -82,8 +98,40 @@ $ionicConfigProvider.platform.android.views.transition('android');
    .state("userMain.main",{
     url : "/main",
     templateUrl : "./views/main.html",
-    controller:function(){
-
+    controller:function($scope,$state,$ionicPopup){
+        $scope.manageCase=function(){
+          $state.go("userMain.myCase");
+           $scope.$emit("changeTitle",{title:"我的案件"});
+           $scope.$emit("change_bg");
+           $scope.$emit("checkState",{checkState:"myCase"});
+        }
+        $scope.addCase=function(){
+              var confirmPopup = $ionicPopup.confirm({
+               title: '添加新的案件',
+               template: '您确定添加新的案件?',
+                buttons: [
+               { text: '取消' ,
+                  onTap:function(){
+                    return false;
+                  }
+                },
+               {
+                 text: '确定',
+                 type: 'button-positive',
+                onTap:function(){
+                  return true;
+                }
+               }
+             ]
+             });
+             confirmPopup.then(function(res) {
+               if(res) {
+                 console.log(res);
+               } else {
+                 console.log(res);
+               }
+             });
+        }
     }
   })
   .state("userMain.tabs-main",{
@@ -107,7 +155,7 @@ $ionicConfigProvider.platform.android.views.transition('android');
         ];
       $scope.goToMyCase=function(){
         $state.go("userMain.tabs-main.delCase");
-         $scope.$emit("changeTitle",{title:"案件时间设置"})
+         $scope.$emit("changeTitle",{title:"具体"})
       }
      
     }
@@ -115,8 +163,24 @@ $ionicConfigProvider.platform.android.views.transition('android');
   .state("userMain.search",{
     url:"/search",
     templateUrl:"./views/search.html",
-    controller:function( $ionicSideMenuDelegate){
-         $ionicSideMenuDelegate.toggleRight()
+    controller:function($scope,$ionicSideMenuDelegate){
+         $ionicSideMenuDelegate.toggleRight();
+         $scope.tags=[
+         {tag:"控股总部",id:"0"},
+         {tag:"江苏大区",id:"1"},
+         {tag:"西北大区",id:"2"},
+         {tag:"内蒙古大区",id:"3"},
+         {tag:"控股总部",id:"4"},
+         {tag:"江苏大区",id:"5"},
+         {tag:"西北大区",id:"6"},
+         {tag:"内蒙古大区",id:"7"},
+         {tag:"控股总部",id:"8"},
+         {tag:"江苏大区",id:"9"},
+         {tag:"西北大区",id:"10"},
+         {tag:"内蒙古大区",id:"11"},
+         ]
+        
+    
     }
   })
   .state("userMain.newDoc",{
@@ -143,8 +207,8 @@ $ionicConfigProvider.platform.android.views.transition('android');
   .state("userMain.caseLibrary",{
     url:"/caseLibrary",
     templateUrl:"./views/caseLibrary",
-    controller:function(){
-      
+    controller:function($scope){
+       
     }
   })
   .state("userMain.help",{
@@ -161,12 +225,12 @@ $ionicConfigProvider.platform.android.views.transition('android');
       
     }
   })
-  .state("userMain.tabs-main.delCase",{
-    url:"/delCase",
+  .state("userMain.tabs-main.time",{
+    url:"/time",
     views:{
-      "delCase":{
-        templateUrl:"./views/delCase.html",
-        controller:function($scope){
+      "time":{
+        templateUrl:"./views/time.html",
+        controller:function($scope,$ionicPopup){
                 $scope.data=[
                   {name:"收到起诉日期",time:"2016-08-01"},
                   {name:"答辩截止日期",time:"2016-08-01"},
@@ -177,16 +241,118 @@ $ionicConfigProvider.platform.android.views.transition('android');
                  
                 ]
                  $scope.add=function(){
-               $scope.data.push({name:"新增的",time:(function(){
+                    
+                 var myPopup = $ionicPopup.show({
+             template: '<input type="text" ng-model="data.case">',
+             title: '输入事项',
+             subTitle: '请输入新增事项',
+             scope: $scope,
+             buttons: [
+               { 
+                text: '取消' ,
+                tap: function(){
+                  return false;
+                }
+                },
+               {
+                 text: '<b>确定</b>',
+                 type: 'button-positive',
+                 onTap: function(e) {
+                    if (!$scope.data.case) {
+                     // 不允许用户关闭，除非输入 wifi 密码
+                     e.preventDefault();
+                   } else {
+                     return $scope.data.case;
+                   }
+                 }
+               },
+             ]
+           });
+           myPopup.then(function(res) {
+            if(res){
+               $scope.data.push({name:res,time:(function(){
                 var d=new Date();
                 var y=d.getFullYear();
                 var m=d.getMonth();
                 var r=d.getDate();
                 return y+"-"+(m+1)+"-"+r;
                })()})
-            }        
-        }
 
+            
+            }
+              
+              
+           });
+
+
+              
+            } 
+
+
+            $scope.set_time=function(){
+              var self=this;
+                 var myPopup = $ionicPopup.show({
+             template: '<input type="text" ng-model="data.time">',
+             title: '修改日期',
+             subTitle: '请输入正确格式如：2016-01-01',
+             scope: $scope,
+             buttons: [
+               { 
+                text: '取消' ,
+                tap: function(){
+                  return false;
+                }
+                },
+               {
+                 text: '<b>确定</b>',
+                 type: 'button-positive',
+                 onTap: function(e) {
+                    if (!$scope.data.time) {
+                     // 不允许用户关闭，除非输入 wifi 密码
+                     e.preventDefault();
+                   } else {
+                     return $scope.data.time;
+                   }
+                 }
+               },
+             ]
+           });
+           myPopup.then(function(res) {
+            if(res){
+              reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+             if(reg.test(res)){
+                self.item.time=res;
+             }else{
+              alert("不合法")
+             }
+            }
+              
+              
+           });
+          }
+            }
+
+      }
+    }
+  })
+  .state("userMain.tabs-main.delCase",{
+    url:"delCase",
+    views:{
+      "delCase":{
+        templateUrl:"./views/delCase.html",
+        controller:function($scope){
+            $scope.caseid="0123456789";
+            $scope.data=[
+            {name:"案件标的",content:"1000万以下"},
+             {name:"我方当事人",content:"张山"},
+              {name:"第三人",content:"张山"},
+               {name:"主办法律顾问",content:"案件主办单位"},
+                {name:"案件主办地区",content:"江苏大区"},
+                 {name:"控股反馈",content:"江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区"},
+                  {name:"控股反馈",content:"江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区"},
+                  
+            ]
+        }
       }
     }
   })
@@ -199,41 +365,53 @@ $ionicConfigProvider.platform.android.views.transition('android');
           var wSrc=["./imgs/add.png","./imgs/reduce.png"];
   
             $scope.data=[
-                {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
-                 {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
-                  {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
-                   {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]},
-                    {name1:"案件处理流程",name2:"一审",name3:"策略思路",flag2:false,flag3:false,flag4:false,wSrc2:wSrc[0],wSrc3:wSrc[0],wSrc4:wSrc[0]}
             ]
-
-            $scope.toggle=function(flagI){
-             var src=flagI.replace(/flag/,"wSrc");
-               if(flagI=='flag2'&&this.item.flag2==true){
-                      this.item.flag2=false;
-                      this.item.flag3=false;
-                      this.item.flag4=false;
-                       this.item.wSrc2=wSrc[0];
-                       this.item.wSrc3=wSrc[0];
-                     
-              }else if(flagI=='flag3'&&this.item.flag3==true){
-              
-                    this.item.flag3=false;
-                    this.item.flag4=false;
-                     this.item.wSrc3=wSrc[0];
-
-              }
-
-              else{
-                this.item[flagI]=!this.item[flagI];
-                 if(this.item[src]==wSrc[0]){
-                        this.item[src]=wSrc[1];
-                        
-                      }else{
-                        this.item[src]=wSrc[0];
-                      }
-               
+            for(var i=0;i<5;i++){
+              $scope.data.push({
+                name1:"案件处理流程",
+                name2_1:"一审",
+                name2_2:"二审",
+                name3_1:"策略思路",
+                name3_2:"案件思路",
+                name3_3:"证据材料",
+                flag2:false,
+                flag3_1:false,
+                flag3_2:false,
+                flag4_1:false,
+                flag4_2:false,
+                flag4_3:false,
+                flag4_4:false,
+                 flag4_5:false,
+                flag4_6:false,
+                wSrc2:wSrc[0],
+                wSrc3_1:wSrc[0],
+                wSrc3_2:wSrc[0],
+                wSrc4_1:wSrc[0],
+                wSrc4_2:wSrc[0],
+                wSrc4_3:wSrc[0],
+                wSrc4_4:wSrc[0],
+                 wSrc4_5:wSrc[0],
+                wSrc4_6:wSrc[0],
+                srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]
+              })
             }
+            $scope.toggle=function(e,flagI){
+               var src=flagI.replace(/flag/,"wSrc");
+              var e=e||window.event;
+               
+             if(e.stopPropagation){
+              e.stopPropagation()
+            }else{
+                e.cancelBubble = true
               }
+              if(this.item[flagI]){
+                this.item[src]=wSrc[0];
+              }else{
+                this.item[src]=wSrc[1];
+              }
+             this.item[flagI]=!this.item[flagI];
+            
+            }
         }
       }
     }
@@ -254,8 +432,13 @@ $ionicConfigProvider.platform.android.views.transition('android');
     views:{
       "casePeople":{
         templateUrl:"./views/casePeople.html",
-        controller:function(){
-
+        controller:function($scope){
+             $scope.data=[
+          {name:"案件主体代表",srcs:[{src:"./imgs/chan.png"}]},
+          {name:"案件主理成员",srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]},
+          {name:"案件协理成员",srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]},
+          {name:"外聘律师评审委员会",srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]},
+        ]
         }
       }
     }

@@ -1,5 +1,14 @@
 <ion-view>
 	<ion-content>
-		<h1>casePeople</h1>
+		<ion-list>
+			<ion-item ng-repeat="item in data">
+				<h3>{{item.name}}：</h3>
+				<div class="img_box">
+					<img ng-repeat="itemSrc in item.srcs" src="{{itemSrc.src}}">
+					<img src="./imgs/bigAdd.png"  ng-click="add_img()">
+				</div>
+				
+			</ion-item>
+		</ion-list>
 	</ion-content>
 </ion-view>

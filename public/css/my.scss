@@ -83,6 +83,35 @@
 	}
 
 }
-@for $i from 2 through 4 {
+@for $i from 2 through 3 {
   .f#{$i} { margin-left: 5% * $i; }
+}
+.f4,.img_box{
+	height:auto;
+	margin:15px 0 15px;
+	width:100%;
+	display:flex;
+	flex-wrap:wrap;
+			img{
+			margin: 10px;
+			width: 60px;
+			height: 60px;
+		}
+	}	
+.tagUl{
+	width:100%;
+	height:auto;
+	display:flex;
+	flex-wrap:wrap;
+	.tagLi{
+		width: auto;
+		height: 30px;
+		border: 1px solid #999;
+		color:#999;
+		margin:5px;
+		font-size: 16px;
+		text-align: center;
+		line-height: 20px;
+		padding: 5px;
+	}
 }

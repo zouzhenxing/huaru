@@ -30,9 +30,9 @@ var mysql = require("mysql");
 Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 exports.pool = mysql.createPool({
-    host     : '127.0.0.1',
+    host     : '120.24.243.130',
     user     : 'root',
-    password : '',
+    password : 'root',
     database : 'hurun',
     dateStrings : 'DATETIME'
 });

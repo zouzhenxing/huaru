@@ -1,6 +1,10 @@
 <ion-tabs class="tabs-icon-bottom tabs-color-active-positive">
-<ion-tab title="时间" icon-on="ion-android-time" icon-off="ion-android-time" ng-click="footerGo('delCase','案件时间设置')">
-	<ion-nav-view name="delCase" ></ion-nav-view>
+<ion-tab title="单一案件主页面" class="hide" ng-click="footerGo('delCase1','具体')">
+  <ion-nav-view name="delCase" ></ion-nav-view>
+</ion-tab>
+
+<ion-tab title="时间" icon-on="ion-android-time" icon-off="ion-android-time" ng-click="footerGo('time','案件时间设置')">
+	<ion-nav-view name="time" ></ion-nav-view>
 </ion-tab>
 <ion-tab title="随手拍" ng-click="footerGo('takePhoto','随手拍')" icon-on="ion-camera" icon-off="ion-camera">
 	<ion-nav-view name="takePhoto"></ion-nav-view>
