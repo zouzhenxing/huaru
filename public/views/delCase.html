@@ -3,18 +3,18 @@
 		<ion-list>
 			<ion-item>
 				<div class="row">
-					<div class="col-80">
-						<span>案件编号：</span><span>{{caseid}}</span>
+					<div class="col-80 row">
+						<span class="col-50">案件编号:</span><span class="col-50">{{id}}</span>
 					</div>
 					<div class="col-20">
-						<div class="text-right">一审中</div>
+						<div class="text-right">{{casestatus}}</div>
 					</div>
 				</div>
 					
 			</ion-item>
 			<ion-item ng-repeat="item in data" class="item-text-wrap">
 				<div class="row">
-					<div class="col-40">{{item.name}}：</div><div class="col-60">{{item.content}}</div>
+					<div class="col-40">{{item.name}}:</div><div class="col-60">{{item.content}}</div>
 				</div>
 			</ion-item>
 		</ion-list>

@@ -4,14 +4,14 @@
 			<ion-item class="item" ng-repeat="item in data" ng-click="set_time()">
 				<div class="row">
 					<span class="col-50">{{item.name}}：</span>
-					<span class="col-40 text-right">{{item.time}}</span>
-					<span class="col-10 text-right"><i class="icon ion-ios-arrow-right"></i></span>
+					<span class="col-50 text-right">{{item.time}}</span>
+					
 				</div>
 				
 			</ion-item>
 			<ion-item>
-				<div class="row">
-						<span class="col-100 text-center" ng-click="add()">新增事项+</span>
+				<div class="row" ng-click="add()">
+						<span class="col-100 text-center">新增事项+</span>
 				</div>
 			
 			</ion-item>

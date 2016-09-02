@@ -1,9 +1,10 @@
 
 	<ion-view>
 	
-		<ion-content>
-		<ion-list>
-		<div class="search" >
+		<ion-content>			
+			<ion-list>
+			<ion-item class="itm">
+				<div class="search" >
 			
 			 <label class="item item-input inp-wrap">
           <i class="icon ion-search placeholder-icon"></i>
@@ -11,20 +12,18 @@
         </label>
         
         </div>
-		</ion-list>
-			
-			<ion-list>
+			</ion-item>
 		<ion-item class="item
 			" ng-click="goToMyCase()" ng-repeat="item in data">
 			<div class="row">
 					<div class="col-80 fw-900 black fs-20">
 					<span>案件名称：</span><span>{{item.name}}</span>
 				</div>	
-				<div class="col-20 text-right positive">{{item.state}}</div>
+				<div class="col-20 text-right positive">{{item.casestatus}}</div>
 			</div>
 			<div class="row">
 				<div class="col-80">
-					<span>案件编号：</span><span>{{item.number}}</span>
+					<span>案件编号：</span><span>{{item.id}}</span>
 				</div>
 			</div>
 			<div class="row">

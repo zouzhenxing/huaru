@@ -1,0 +1,10 @@
+<ion-view>
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="item in data">
+					<span>{{item.name}} :</span><input style="display:inline-block" type="text"  ng-model="item.content">
+			</ion-item>
+			<ion-item><button class="button button-small button-calm" ng-click="submit()">确定提交</button></ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

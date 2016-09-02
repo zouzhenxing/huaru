@@ -2,28 +2,25 @@
 .userMain .mainContent,.scroll,.pane{
 	width:100%;
 	height:100%;
-	
 	display:flex;
 	flex-direction:column;
 		.circle_wrap{
-			flex:1;
-			
+			flex:1;	
 			display: flex;
-			justify-content: center;
-			align-items:center;
 			flex-direction: column;
+			align-items: center;
 				.circle1{
 					width: 200px;
 					height: 200px;
 					border-radius:50%;
-					background:url("../imgs/1.png") 100% 100% no-repeat;
+					background:url("../image/1.png") 100% 100% no-repeat;
 				
 				}
 				.circle2{
 					width: 200px;
 					height: 200px;
 					border-radius:50%;
-					background:url("../imgs/2.png") 100% 100% no-repeat; 
+					background:url("../image/2.png") 100% 100% no-repeat; 
 				
 				}
 			
@@ -50,12 +47,16 @@
 	width:100%;
 	height:50px;
 	background:#E6E6E6;
-	display:flex;
-	align-items:center;
-	justify-content:center;
+	position:relative;
 	.inp-wrap{
 		width: 90%;
 		height: 80%;
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
 		border-radius:20px;
 		
 	}
@@ -101,9 +102,8 @@
 .tagUl{
 	width:100%;
 	height:auto;
-	display:flex;
-	flex-wrap:wrap;
 	.tagLi{
+		float: left;
 		width: auto;
 		height: 30px;
 		border: 1px solid #999;
@@ -115,3 +115,4 @@
 		padding: 5px;
 	}
 }
+.itm{padding:0;}
