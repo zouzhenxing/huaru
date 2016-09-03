@@ -4,15 +4,7 @@
 global.rootPath = __dirname;
 global.Promise = require("bluebird");
 global.fs = Promise.promisifyAll(require("fs"));
-
-/**
- * 加载配置文件
- */
-var loadConfig = () => {
-    var data = fs.readFileSync(rootPath.concat("/config.json"));
-    return JSON.parse(data.toString());
-}
-global.config = loadConfig();
+global.config = require("./config.json");
 
 /**
  * 连接redis数据库
