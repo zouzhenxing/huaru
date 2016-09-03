@@ -1,4 +1,4 @@
-angular.module("myApp",["ionic"])
+angular.module("ctrl_module",[])
 .controller("SideMenuCtrl",function($scope,$ionicSideMenuDelegate){
      $scope.toggleMenu = function(dir){
     $ionicSideMenuDelegate["toggle"+dir]();
@@ -16,34 +16,64 @@ angular.module("myApp",["ionic"])
              
             }
 })
-.config(function($stateProvider,$urlRouterProvider,$ionicConfigProvider){
-//tabs位置配置
-$ionicConfigProvider.platform.ios.tabs.style('standard');
-$ionicConfigProvider.platform.ios.tabs.position('bottom');
-$ionicConfigProvider.platform.android.tabs.style('standard');
-$ionicConfigProvider.platform.android.tabs.position('bottom');
+.controller("addCase_ctrl",function($scope,$ionicPopup,$state,$http,add_hrcase){
+    $scope.data=[
+        {name:"案件名称",content:""},
+        {name:"办案主题",content:""},
+        {name:"我方角色",content:""},
+        {name:"主办律师",content:""}
 
-$ionicConfigProvider.platform.ios.navBar.alignTitle('center');
-$ionicConfigProvider.platform.android.navBar.alignTitle('center');
-
-$ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
-$ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
-
-$ionicConfigProvider.platform.ios.views.transition('ios');
-$ionicConfigProvider.platform.android.views.transition('android');
-
-
-  $urlRouterProvider.otherwise("/userMain");
-
-  $stateProvider
-  .state("userMain",{
-    url:"/userMain",
-    templateUrl:"./views/userMain.html",
-       controller:function($scope,$state,$ionicSideMenuDelegate){
-                 // 初始化
+    ];
+    var flag=true;
+    $scope.submit=function(){
+      for(var i=0;i<$scope.data.length;i++){
+        if($scope.data[i].content==""){
+          flag=false;
+          alert("请填写完整");
+          return false;  
+        }
+      }
+      flag=true;
+      if(flag){
+           var confirmPopup = $ionicPopup.confirm({
+               title: '添加新的案件',
+               template: '您确定添加?',
+                buttons: [
+               { text: '取消' ,
+                  onTap:function(){
+                    return false;
+                  }
+                },
+               {
+                 text: '确定',
+                 type: 'button-positive',
+                onTap:function(){
+                  return true;
+                }
+               }
+             ]
+             });
+             confirmPopup.then(function(res) {
+               if(res) {
+                 add_hrcase.add_hrcase($scope).success(function(data){
+                    alert("添加成功");
+                    for(var i=0;i<$scope.data.length;i++){
+                      $scope.data[i].content="";
+                    }
+                  })
+                 $state.go("userMain.myCase");
+                  $scope.$emit("changeTitle",{title:"我的案件"});
+               }
+             });
+      }
+    }
+})
+.controller("userMain_ctrl",function($scope,$state,$ionicSideMenuDelegate){
+                     // 初始化
                   $state.go("userMain.main");
                   $scope.title="主页";
                   var checkState="main";
+                  var id_;
                   $scope.selectedRow = 0;
                   $scope.classify=[
                         {content:"主页",state:"main"},
@@ -74,7 +104,7 @@ $ionicConfigProvider.platform.android.views.transition('android');
                     // 底部跳转按钮
                      $scope.footerGo=function(state,title){
 
-                              $state.go("userMain.tabs-main."+state);
+                              $state.go("userMain.tabs-main."+state,{id:id_});
                               $scope.title=title;
                       }
                       $scope.$on("changeTitle",function(e,d){
@@ -84,6 +114,9 @@ $ionicConfigProvider.platform.android.views.transition('android');
                         $scope.$on("change_bg",function(){
                         $scope.selectedRow=1;
                       })
+                      $scope.$on("id",function(e,d){
+                          id_=d.id;
+                      })
 
                       // 后退按钮
                        $scope.goBack=function(){
@@ -92,79 +125,57 @@ $ionicConfigProvider.platform.android.views.transition('android');
                             checkState='main';
                             $scope.selectedRow = 0;
                     }
-        }
-
-  })
-   .state("userMain.main",{
-    url : "/main",
-    templateUrl : "./views/main.html",
-    controller:function($scope,$state,$ionicPopup){
-        $scope.manageCase=function(){
+})
+.controller("main_ctrl",function($scope,$state,$ionicPopup){
+       $scope.manageCase=function(){
           $state.go("userMain.myCase");
            $scope.$emit("changeTitle",{title:"我的案件"});
            $scope.$emit("change_bg");
            $scope.$emit("checkState",{checkState:"myCase"});
         }
         $scope.addCase=function(){
-              var confirmPopup = $ionicPopup.confirm({
-               title: '添加新的案件',
-               template: '您确定添加新的案件?',
-                buttons: [
-               { text: '取消' ,
-                  onTap:function(){
-                    return false;
+             
+                 $state.go("userMain.addCase");
+                  $scope.$emit("changeTitle",{title:"添加案件"});
+               }
+})
+.controller("myCase_ctrl",function($scope,$state,$http,get_hrcase){
+        var  str;
+  $scope.data=[];
+get_hrcase.get_hrcase($scope).success(function(obj){
+		var data=obj.data;
+          if(data.length!=0){
+           
+              for(var i=0;i<data.length;i++){
+                 if(data[i].casestatus=='1'){
+                    str='请上报';
+                  }else{
+                    str='已结案';
                   }
-                },
-               {
-                 text: '确定',
-                 type: 'button-positive',
-                onTap:function(){
-                  return true;
-                }
-               }
-             ]
-             });
-             confirmPopup.then(function(res) {
-               if(res) {
-                 console.log(res);
-               } else {
-                 console.log(res);
-               }
-             });
-        }
-    }
-  })
-  .state("userMain.tabs-main",{
-    url : "/tabs-main",
-    templateUrl : "./views/tabs-main.html",
-    controller:function(){
+                $scope.data.push({
+                  name:"民事纠纷案",
+                  sheme:"办案主题",
+                  role:"原告",
+                  lawyer:data[i].weparty,
+                  id:data[i].id,
+                  casestatus:str
+                })
+                 
+              }
+          }else{
+            alert("数据出错")
+          }
+})
 
-    }
-  })
- 
-  .state("userMain.myCase",{
-    url:"/myCase",
-    templateUrl:"./views/myCase.html",
-    controller:function($scope,$state){
-        $scope.data=[
-            {name:"民事纠纷案",number:"001",sheme:"办案主题",role:"原告",lawyer:"张三",state:"请上报"},
-             {name:"民事纠纷案",number:"002",sheme:"办案主题",role:"原告",lawyer:"张三",state:"请上报"},
-              {name:"民事纠纷案",number:"003",sheme:"办案主题",role:"原告",lawyer:"张三",state:"请上报"},
-               {name:"民事纠纷案",number:"004",sheme:"办案主题",role:"原告",lawyer:"张三",state:"已结案"},
-                {name:"民事纠纷案",number:"005",sheme:"办案主题",role:"原告",lawyer:"张三",state:"已结案"}
-        ];
+        
       $scope.goToMyCase=function(){
-        $state.go("userMain.tabs-main.delCase");
-         $scope.$emit("changeTitle",{title:"具体"})
+        $state.go("userMain.tabs-main.delCase",{id:this.item.id});
+         $scope.$emit("changeTitle",{title:"案件具体信息"});
+         $scope.$emit("id",{id:this.item.id});
       }
-     
-    }
-  })
-  .state("userMain.search",{
-    url:"/search",
-    templateUrl:"./views/search.html",
-    controller:function($scope,$ionicSideMenuDelegate){
-         $ionicSideMenuDelegate.toggleRight();
+})
+.controller("search_ctrl",function($scope,$ionicSideMenuDelegate){
+   $ionicSideMenuDelegate.toggleRight();
          $scope.tags=[
          {tag:"控股总部",id:"0"},
          {tag:"江苏大区",id:"1"},
@@ -179,60 +190,10 @@ $ionicConfigProvider.platform.android.views.transition('android');
          {tag:"西北大区",id:"10"},
          {tag:"内蒙古大区",id:"11"},
          ]
-        
-    
-    }
-  })
-  .state("userMain.newDoc",{
-    url:"/newDoc",
-    templateUrl:"./views/newDoc.html",
-    controller:function(){
-      
-    }
-  })
-  .state("userMain.myDoc",{
-    url:"/myDoc",
-    templateUrl:"./views/myDoc.html",
-    controller:function(){
-      
-    }
-  })
-  .state("userMain.lawyerLetter",{
-    url:"/lawyerLetter",
-    templateUrl:"./views/lawyerLetter.html",
-    controller:function(){
-      
-    }
-  })
-  .state("userMain.caseLibrary",{
-    url:"/caseLibrary",
-    templateUrl:"./views/caseLibrary",
-    controller:function($scope){
-       
-    }
-  })
-  .state("userMain.help",{
-    url:"/help",
-    templateUrl:"./views/help.html",
-    controller:function(){
-      
-    }
-  })
-  .state("userMain.guide",{
-    url:"/guide",
-    templateUrl:"./views/guide.html",
-    controller:function(){
-      
-    }
-  })
-  .state("userMain.tabs-main.time",{
-    url:"/time",
-    views:{
-      "time":{
-        templateUrl:"./views/time.html",
-        controller:function($scope,$ionicPopup){
-                $scope.data=[
-                  {name:"收到起诉日期",time:"2016-08-01"},
+})
+.controller("time_ctrl",function($scope,$ionicPopup,$http,$stateParams,get_casestatus){
+                 $scope.data=[
+                  {name:"收到起诉日期",time:""},
                   {name:"答辩截止日期",time:"2016-08-01"},
                   {name:"举证截止日期",time:"2016-08-01"},
                   {name:"反诉截止日期",time:"2016-08-01"},
@@ -240,6 +201,14 @@ $ionicConfigProvider.platform.android.views.transition('android');
                   {name:"一审（重审）开庭时间",time:"2016-08-01"}
                  
                 ]
+
+          $scope.id=$stateParams.id;
+         get_casestatus.get_casestatus($scope).success(function(obj){
+            var data=obj.data[0];
+              $scope.data[0].time=data.date;
+            
+          })
+              
                  $scope.add=function(){
                     
                  var myPopup = $ionicPopup.show({
@@ -329,40 +298,39 @@ $ionicConfigProvider.platform.android.views.transition('android');
               
               
            });
-          }
-            }
-
-      }
-    }
-  })
-  .state("userMain.tabs-main.delCase",{
-    url:"delCase",
-    views:{
-      "delCase":{
-        templateUrl:"./views/delCase.html",
-        controller:function($scope){
-            $scope.caseid="0123456789";
+          }       
+})
+.controller("delCase_ctrl",function($scope,$http,$stateParams,$state,get_delCase){
+        $scope.id=$stateParams.id
+          get_delCase.get_delCase($scope).success(function(obj){
+            var data=obj.data[0];
+            $scope.id=data.id;
+            $scope.casestatus=data.casestatus;
             $scope.data=[
-            {name:"案件标的",content:"1000万以下"},
-             {name:"我方当事人",content:"张山"},
-              {name:"第三人",content:"张山"},
-               {name:"主办法律顾问",content:"案件主办单位"},
-                {name:"案件主办地区",content:"江苏大区"},
-                 {name:"控股反馈",content:"江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区"},
-                  {name:"控股反馈",content:"江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区江苏大区"},
-                  
+            {name:"案件标的",content:data.casesubject},
+             {name:"我方当事人",content:data.weparty},
+              {name:"第三人",content:data.thirdparty},
+               {name:"主办法律顾问",content:"张三"},
+                {name:"案件主办地区",content:data.organizers},
+                 {name:"控股反馈",content:data.organizers},
+                  {name:"控股反馈",content:data.organizers}    
             ]
-        }
-      }
-    }
-  })
-  .state("userMain.tabs-main.takePhoto",{
-    url:"/takePhoto",
-    views:{
-      "takePhoto":{
-        templateUrl:"./views/takePhoto.html",
-        controller:function($scope){
-          var wSrc=["./imgs/add.png","./imgs/reduce.png"];
+          })
+})
+.controller("takePhoto_ctrl",function($scope,$http,$state,$stateParams,get_photo){
+          $scope.id=$stateParams.id;
+          var src=[];  
+            get_photo.get_photo($scope).success(function(obj){
+              src.push({src:obj.data[0].imgurl})
+          });
+            // $http({
+            // 	url:"http://localhost:8088/casephoto/3",
+            // 	data:{cid:3,"imgurl":"./image/chan.png"},
+            // 	method:"put"
+            // }).success(function(data){
+            // 	console.log(data);
+            // })
+          var wSrc=["./image/add.png","./image/reduce.png"];
   
             $scope.data=[
             ]
@@ -392,7 +360,7 @@ $ionicConfigProvider.platform.android.views.transition('android');
                 wSrc4_4:wSrc[0],
                  wSrc4_5:wSrc[0],
                 wSrc4_6:wSrc[0],
-                srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]
+                srcs:src
               })
             }
             $scope.toggle=function(e,flagI){
@@ -412,48 +380,17 @@ $ionicConfigProvider.platform.android.views.transition('android');
              this.item[flagI]=!this.item[flagI];
             
             }
-        }
-      }
-    }
-  })
-  .state("userMain.tabs-main.doc",{
-    url:"/doc",
-    views:{
-      "doc":{
-        templateUrl:"./views/doc.html",
-        controller:function(){
-
-        }
-      }
-    }
-  })
-  .state("userMain.tabs-main.casePeople",{
-    url:"/casePeople",
-    views:{
-      "casePeople":{
-        templateUrl:"./views/casePeople.html",
-        controller:function($scope){
-             $scope.data=[
-          {name:"案件主体代表",srcs:[{src:"./imgs/chan.png"}]},
-          {name:"案件主理成员",srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]},
-          {name:"案件协理成员",srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]},
-          {name:"外聘律师评审委员会",srcs:[{src:"./imgs/chan.png"},{src:"./imgs/chan.png"},{src:"./imgs/chan.png"}]},
-        ]
-        }
-      }
-    }
-  })
-  .state("userMain.tabs-main.lawyerWay",{
-    url:"/lawyerWay",
-    views:{
-      "lawyerWay":{
-        templateUrl:"./views/lawyerWay.html",
-        controller:function(){
-
-        }
-      }
-    }
-  })
 })
-
-
+.controller("casePeople_ctrl",function($scope,$http,$state,$stateParams,get_photo){
+          var src=[];
+         	$scope.id=$stateParams.id;
+          get_photo.get_photo($scope).success(function(obj){
+             src.push({src:obj.data[0].imgurl});
+          })
+             $scope.data=[
+          {name:"案件主体代表",srcs:src},
+          {name:"案件主理成员",srcs:src},
+          {name:"案件协理成员",srcs:src},
+          {name:"外聘律师评审委员会",srcs:src}
+        ]
+})
